@@ -116,11 +116,14 @@ public final class SupaSpawn extends JavaPlugin implements Listener {
             return true;
         }
         if (!(sender instanceof Player player)) { sender.sendMessage("This command can only be used by a player."); return true; }
-        if (args.length > 0 && !args[0].equalsIgnoreCase("1")) {
-            player.performCommand("spawn " + args[0]);
+        if (args.length == 1 && args[0].equalsIgnoreCase("1")) {
+            beginTeleport(player);
             return true;
         }
-        beginTeleport(player);
+        String menuCommand = getConfig().getString("menu-command", "dmenu open spawn {player}");
+        if (menuCommand != null && !menuCommand.isBlank()) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), menuCommand.replace("{player}", player.getName()));
+        }
         return true;
     }
 
