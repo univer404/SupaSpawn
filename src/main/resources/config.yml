@@ -27,7 +27,7 @@ first-join:
   welcome-messages:
     - "<#37BFF8>ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴇxᴀᴍᴘʟᴇꜱᴍᴘ"
     - "<#37BFF8>ᴊᴏɪɴ ᴛʜᴇ ᴇxᴀᴍᴘʟᴇꜱᴍᴘ ᴅɪꜱᴄᴏʀᴅ ᴄᴏᴍᴍᴜɴɪᴛʏ!"
-    - "<#37BFF8>● <underlined><#FFFFFF>discord.gg/examplesmp</#FFFFFF></underlined>"
+    - "<#37BFF8>● <click:open_url:'http://discord.gg/examplesmp'><underlined><#FFFFFF>discord.gg/examplesmp</#FFFFFF></underlined></click>"
   # Set to [] to disable the starter kit. Material names are Bukkit Material names.
   starter-kit:
     - "COOKED_BEEF:16"
@@ -38,7 +38,8 @@ first-join:
     - "CHAINMAIL_HELMET:1"
   # Optional console commands, executed once on first join. Use {player} for their name.
   # Example: ["someplugin open {player}"]
-  console-commands: []
+  console-commands:
+    - "ibooks open updates {player}"
 
 join:
   hide-join-message: true
