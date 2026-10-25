@@ -1,13 +1,13 @@
 name: SupaSpawn
-version: 1.0.0
+version: 1.0.1
 main: com.supaspawn.SupaSpawn
 api-version: '1.21'
-description: Configurable spawn teleportation for Paper and Purpur.
+description: Configurable spawn teleportation and GUI for Paper and Purpur.
 author: univer404
 commands:
   spawn:
-    description: Teleport to spawn.
-    usage: /spawn [1]
+    description: Open the spawn menu or teleport to spawn.
+    usage: /spawn
     aliases: [lobby, hub]
   setspawn:
     description: Set the server spawn destination.
