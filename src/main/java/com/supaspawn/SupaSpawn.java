@@ -25,6 +25,7 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
@@ -121,7 +122,7 @@ public final class SupaSpawn extends JavaPlugin implements Listener {
         }
         if (!(sender instanceof Player player)) { sender.sendMessage("This command can only be used by a player."); return true; }
         if (args.length > 0) {
-            player.sendMessage(message("<red>Usage: /spawn</red>"));
+            player.sendMessage(message("<red>ᴜꜱᴀɢᴇ: /ꜱᴘᴀᴡɴ</red>"));
             return true;
         }
         if (getConfig().getBoolean("gui.enabled", true)) openSpawnGui(player);
@@ -148,8 +149,8 @@ public final class SupaSpawn extends JavaPlugin implements Listener {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.displayName(message(name));
-            if (lore != null && !lore.isEmpty()) meta.lore(lore.stream().map(this::message).toList());
+            meta.displayName(message(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+            if (lore != null && !lore.isEmpty()) meta.lore(lore.stream().map(line -> message(line).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).toList());
             item.setItemMeta(meta);
         }
         return item;
