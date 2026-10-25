@@ -1,0 +1,24 @@
+name: SupaSpawn
+version: 1.0.0
+main: com.supaspawn.SupaSpawn
+api-version: '1.21'
+description: Configurable spawn teleportation for Paper and Purpur.
+author: univer404
+commands:
+  spawn:
+    description: Teleport to spawn.
+    usage: /spawn [1]
+    aliases: [lobby, hub]
+  setspawn:
+    description: Set the server spawn destination.
+    permission: supaspawn.setspawn
+  delspawn:
+    description: Remove the configured spawn destination.
+    permission: supaspawn.delspawn
+permissions:
+  supaspawn.setspawn:
+    description: Allows setting the spawn destination.
+    default: op
+  supaspawn.delspawn:
+    description: Allows removing the spawn destination.
+    default: op

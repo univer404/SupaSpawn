@@ -1,0 +1,44 @@
+# SupaSpawn configuration
+teleport:
+  countdown-seconds: 5
+  cancel-on-move: true
+  movement-threshold: 0.5
+  # If true, players already in this world are told they are at spawn 1.
+  spawn-world-name: "spawn"
+  already-at-spawn-check-world: true
+  sound-success: "ENTITY_ENDERMAN_TELEPORT"
+  sound-failure: "ENTITY_VILLAGER_NO"
+
+messages:
+  no-spawn: "<red>Spawn location is not set!</red>"
+  already-at-spawn: "<red>You are already at ꜱᴘᴀᴡɴ 1.</red>"
+  countdown: "<#A7A7A7>You will be teleported in <#37BFF8>{seconds} <#A7A7A7>seconds"
+  teleported: "<#A7A7A7>You teleported to <#37BFF8>ꜱᴘᴀᴡɴ 1"
+  cancelled: "<#FB5454>Teleport cancelled because you moved."
+  set-success: "<green>You have successfully set the spawn location at your location!</green>"
+  delete-success: "<green>You have successfully unset the spawn location!</green>"
+  no-permission: "<red>You don't have permission to execute this command!</red>"
+  teleport-failed: "<red>Teleport failed. The spawn world may be unavailable.</red>"
+
+first-join:
+  welcome-messages:
+    - "<#37BFF8>ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴇxᴀᴍᴘʟᴇꜱᴍᴘ"
+    - "<#37BFF8>ᴊᴏɪɴ ᴛʜᴇ ᴇxᴀᴍᴘʟᴇꜱᴍᴘ ᴅɪꜱᴄᴏʀᴅ ᴄᴏᴍᴍᴜɴɪᴛʏ!"
+    - "<#37BFF8>● <underlined><#FFFFFF>discord.gg/examplesmp</#FFFFFF></underlined>"
+  # Set to [] to disable the starter kit. Material names are Bukkit Material names.
+  starter-kit:
+    - "COOKED_BEEF:16"
+    - "STONE_SWORD:1"
+    - "CHAINMAIL_CHESTPLATE:1"
+    - "CHAINMAIL_LEGGINGS:1"
+    - "CHAINMAIL_BOOTS:1"
+    - "CHAINMAIL_HELMET:1"
+  # Optional console commands, executed once on first join. Use {player} for their name.
+  # Example: ["someplugin open {player}"]
+  console-commands: []
+
+join:
+  hide-join-message: true
+  hide-leave-message: true
+  teleport-to-spawn-when-joining-spawn-world: true
+  teleport-on-respawn: true
