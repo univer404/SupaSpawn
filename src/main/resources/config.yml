@@ -1,4 +1,7 @@
 # SupaSpawn configuration
+# Command run by console when /spawn, /lobby, or /hub is used without argument 1.
+# Leave blank to disable the menu command.
+menu-command: "dmenu open spawn {player}"
 teleport:
   countdown-seconds: 5
   cancel-on-move: true
