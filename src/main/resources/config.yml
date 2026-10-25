@@ -1,12 +1,21 @@
 # SupaSpawn configuration
-# Command run by console when /spawn, /lobby, or /hub is used without argument 1.
-# Leave blank to disable the menu command.
-menu-command: "dmenu open spawn {player}"
+gui:
+  # true = /spawn opens the 3-row GUI; false = /spawn starts teleport countdown directly.
+  enabled: true
+  title: "<#37BFF8>Spawn"
+  spawn-slot: 13
+  spawn-material: "COMPASS"
+  spawn-name: "<#37BFF8>Spawn"
+  spawn-lore:
+    - "<#A7A7A7>Click to teleport to spawn."
+    - "<#A7A7A7>Teleport delay: 5 seconds."
+  filler-material: "BLACK_STAINED_GLASS_PANE"
+  filler-name: " "
+
 teleport:
   countdown-seconds: 5
   cancel-on-move: true
   movement-threshold: 0.5
-  # If true, players already in this world are told they are at spawn 1.
   spawn-world-name: "spawn"
   already-at-spawn-check-world: true
   sound-success: "ENTITY_ENDERMAN_TELEPORT"
@@ -14,13 +23,13 @@ teleport:
 
 messages:
   no-spawn: "<red>Spawn location is not set!</red>"
-  already-at-spawn: "<red>You are already at ꜱᴘᴀᴡɴ 1.</red>"
+  already-at-spawn: "<red>You are already at spawn.</red>"
   countdown: "<#A7A7A7>You will be teleported in <#37BFF8>{seconds} <#A7A7A7>seconds"
-  teleported: "<#A7A7A7>You teleported to <#37BFF8>ꜱᴘᴀᴡɴ 1"
+  teleported: "<#A7A7A7>You teleported to <#37BFF8>spawn"
   cancelled: "<#FB5454>Teleport cancelled because you moved."
   set-success: "<green>You have successfully set the spawn location at your location!</green>"
   delete-success: "<green>You have successfully unset the spawn location!</green>"
-  no-permission: "<red>You don't have permission to execute this command!</red>"
+  no-permission: "<red>You don't have permission to use this command!</red>"
   teleport-failed: "<red>Teleport failed. The spawn world may be unavailable.</red>"
 
 first-join:
@@ -28,7 +37,6 @@ first-join:
     - "<#37BFF8>ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴇxᴀᴍᴘʟᴇꜱᴍᴘ"
     - "<#37BFF8>ᴊᴏɪɴ ᴛʜᴇ ᴇxᴀᴍᴘʟᴇꜱᴍᴘ ᴅɪꜱᴄᴏʀᴅ ᴄᴏᴍᴍᴜɴɪᴛʏ!"
     - "<#37BFF8>● <click:open_url:'http://discord.gg/examplesmp'><underlined><#FFFFFF>discord.gg/examplesmp</#FFFFFF></underlined></click>"
-  # Set to [] to disable the starter kit. Material names are Bukkit Material names.
   starter-kit:
     - "COOKED_BEEF:16"
     - "STONE_SWORD:1"
@@ -36,8 +44,6 @@ first-join:
     - "CHAINMAIL_LEGGINGS:1"
     - "CHAINMAIL_BOOTS:1"
     - "CHAINMAIL_HELMET:1"
-  # Optional console commands, executed once on first join. Use {player} for their name.
-  # Example: ["someplugin open {player}"]
   console-commands:
     - "ibooks open updates {player}"
 
