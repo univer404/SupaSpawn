@@ -7,15 +7,14 @@ SupaSpawn converts the supplied spawn Skript into a configurable Paper/Purpur pl
 - Java 21
 
 ## Commands
-- `/spawn`, `/lobby`, `/hub` — start the configurable countdown to the saved spawn.
-- `/spawn 1` — explicitly request Spawn 1.
+- `/spawn`, `/lobby`, `/hub` — open the 3-row spawn GUI when enabled; otherwise start the teleport countdown directly.
 - `/setspawn` — set the destination at your current position. Permission: `supaspawn.setspawn`.
 - `/delspawn` — remove the saved destination. Permission: `supaspawn.delspawn`.
 
 The spawn location persists in `config.yml`. Countdown teleports cancel when the player moves farther than the configured threshold. Teleport tasks are cleaned up on quit and plugin shutdown.
 
 ## Configuration
-Edit `plugins/SupaSpawn/config.yml` for countdown, movement cancellation, messages, sounds, the spawn-world behavior, first-join welcome messages, starter kit, and optional console commands. Messages support MiniMessage colors including hex colors such as `<#37BFF8>`.
+Edit `plugins/SupaSpawn/config.yml` for the GUI toggle (`gui.enabled`), GUI title/item/slot and filler, countdown, movement cancellation, messages, sounds, the spawn-world behavior, first-join welcome messages, starter kit, and optional console commands. The GUI is exactly 3 rows (27 slots). Messages support MiniMessage colors including hex colors such as `<#37BFF8>`.
 
 The default first-join messages and starter kit follow the supplied Skript. The external `/dmenu` and `/ibooks` commands are not hard dependencies; configure optional console commands if those plugins are installed.
 
