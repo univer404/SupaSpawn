@@ -22,15 +22,15 @@ teleport:
   sound-failure: "ENTITY_VILLAGER_NO"
 
 messages:
-  no-spawn: "<red>Spawn location is not set!</red>"
-  already-at-spawn: "<red>You are already at spawn.</red>"
+  no-spawn: "<red>ꜱᴘᴀᴡɴ ʟᴏᴄᴀᴛɪᴏɴ ɪꜱ ɴᴏᴛ ꜱᴇᴛ!</red>"
+  already-at-spawn: "<red>ʏᴏᴜ ᴀʀᴇ ᴀʟʀᴇᴀᴅʏ ᴀᴛ ꜱᴘᴀᴡɴ.</red>"
   countdown: "<#A7A7A7>You will be teleported in <#37BFF8>{seconds} <#A7A7A7>seconds"
   teleported: "<#A7A7A7>You teleported to <#37BFF8>spawn"
   cancelled: "<#FB5454>Teleport cancelled because you moved."
-  set-success: "<green>You have successfully set the spawn location at your location!</green>"
-  delete-success: "<green>You have successfully unset the spawn location!</green>"
-  no-permission: "<red>You don't have permission to use this command!</red>"
-  teleport-failed: "<red>Teleport failed. The spawn world may be unavailable.</red>"
+  set-success: "<green>ʏᴏᴜ ʜᴀᴠᴇ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ꜱᴇᴛ ᴛʜᴇ ꜱᴘᴀᴡɴ ʟᴏᴄᴀᴛɪᴏɴ!</green>"
+  delete-success: "<green>ʏᴏᴜ ʜᴀᴠᴇ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴜɴꜱᴇᴛ ᴛʜᴇ ꜱᴘᴀᴡɴ ʟᴏᴄᴀᴛɪᴏɴ!</green>"
+  no-permission: "<red>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ!</red>"
+  teleport-failed: "<red>ᴛᴇʟᴇᴘᴏʀᴛ ꜰᴀɪʟᴇᴅ. ᴛʜᴇ ꜱᴘᴀᴡɴ ᴡᴏʀʟᴅ ᴍᴀʏ ʙᴇ ᴜɴᴀᴠᴀɪʟᴀʙʟᴇ.</red>"
 
 first-join:
   welcome-messages:
