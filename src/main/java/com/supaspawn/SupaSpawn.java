@@ -18,6 +18,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import net.kyori.adventure.text.Component;
@@ -30,13 +34,13 @@ public final class SupaSpawn extends JavaPlugin implements Listener {
     private final Map<UUID, BukkitRunnable> pendingTeleports = new HashMap<>();
     private final Map<UUID, Location> startLocations = new HashMap<>();
     private Location spawnLocation;
+    private static final String SPAWN_GUI_ID = "supaspawn:main";
 
     @Override public void onEnable() {
         saveDefaultConfig();
         loadSpawn();
         Bukkit.getPluginManager().registerEvents(this, this);
-        Objects.requireNonNull(getCommand("spawn")).setTabCompleter((sender, command, alias, args) ->
-            args.length == 1 ? List.of("1").stream().filter(s -> s.startsWith(args[0].toLowerCase(Locale.ROOT))).toList() : List.of());
+        Objects.requireNonNull(getCommand("spawn")).setTabCompleter((sender, command, alias, args) -> List.of());
         getLogger().info("SupaSpawn 1.0.0 enabled.");
     }
 
@@ -116,15 +120,63 @@ public final class SupaSpawn extends JavaPlugin implements Listener {
             return true;
         }
         if (!(sender instanceof Player player)) { sender.sendMessage("This command can only be used by a player."); return true; }
-        if (args.length == 1 && args[0].equalsIgnoreCase("1")) {
-            beginTeleport(player);
+        if (args.length > 0) {
+            player.sendMessage(message("<red>Usage: /spawn</red>"));
             return true;
         }
-        String menuCommand = getConfig().getString("menu-command", "dmenu open spawn {player}");
-        if (menuCommand != null && !menuCommand.isBlank()) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), menuCommand.replace("{player}", player.getName()));
-        }
+        if (getConfig().getBoolean("gui.enabled", true)) openSpawnGui(player);
+        else beginTeleport(player);
         return true;
+    }
+
+    private void openSpawnGui(Player player) {
+        int rows = 3;
+        String title = getConfig().getString("gui.title", "<#37BFF8>Spawn");
+        Inventory inventory = Bukkit.createInventory(null, rows * 9, message(title));
+        Material filler = parseMaterial(getConfig().getString("gui.filler-material", "BLACK_STAINED_GLASS_PANE"), Material.BLACK_STAINED_GLASS_PANE);
+        ItemStack fillerItem = makeGuiItem(filler, getConfig().getString("gui.filler-name", " "), List.of());
+        for (int slot = 0; slot < inventory.getSize(); slot++) inventory.setItem(slot, fillerItem.clone());
+        int slot = getConfig().getInt("gui.spawn-slot", 13);
+        if (slot < 0 || slot >= inventory.getSize()) slot = 13;
+        List<String> lore = getConfig().getStringList("gui.spawn-lore");
+        inventory.setItem(slot, makeGuiItem(parseMaterial(getConfig().getString("gui.spawn-material", "COMPASS"), Material.COMPASS),
+            getConfig().getString("gui.spawn-name", "<#37BFF8>Spawn"), lore));
+        player.openInventory(inventory);
+    }
+
+    private ItemStack makeGuiItem(Material material, String name, List<String> lore) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.displayName(message(name));
+            if (lore != null && !lore.isEmpty()) meta.lore(lore.stream().map(this::message).toList());
+            item.setItemMeta(meta);
+        }
+        return item;
+    }
+
+    private Material parseMaterial(String raw, Material fallback) {
+        if (raw == null || raw.isBlank()) return fallback;
+        String name = raw.trim().toUpperCase(Locale.ROOT);
+        if (name.startsWith("MINECRAFT:")) name = name.substring("MINECRAFT:".length());
+        try { return Material.valueOf(name); }
+        catch (IllegalArgumentException ex) {
+            getLogger().warning("Invalid GUI material '" + raw + "'; using " + fallback.name() + ".");
+            return fallback;
+        }
+    }
+
+    @EventHandler public void onGuiClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player player)) return;
+        if (!event.getView().title().equals(message(getConfig().getString("gui.title", "<#37BFF8>Spawn")))) return;
+        event.setCancelled(true);
+        if (event.getRawSlot() != getConfig().getInt("gui.spawn-slot", 13)) return;
+        player.closeInventory();
+        beginTeleport(player);
+    }
+
+    @EventHandler public void onGuiDrag(InventoryDragEvent event) {
+        if (event.getView().title().equals(message(getConfig().getString("gui.title", "<#37BFF8>Spawn")))) event.setCancelled(true);
     }
 
     private void beginTeleport(Player player) {
